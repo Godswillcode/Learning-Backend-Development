@@ -1,6 +1,6 @@
 const express = require('express');
-// const cors = require('cors') 
-const bigHead = require('./route/route-index')
+const cors = require('cors') 
+const router = require('./route/route-index')
 
 dotenv = require('dotenv');
 
@@ -12,9 +12,10 @@ const app = express()
 const port = 3002
 
 app.use(express.urlencoded({ extended: true }))
-// app.use(cors())
 app.use(express.json())
-app.use("/", bigHead)
+app.use(cors())
+
+app.use("/todos", router)
 
 
 db.on('error', console.error.bind(console, 'MongoDB connection error'));
