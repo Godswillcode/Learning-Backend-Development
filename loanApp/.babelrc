@@ -4,7 +4,7 @@
     ],
     "plugins": [
         [
-            "model-resolver",
+            "module-resolver",
             {
                 "root": [
                     "./src"
