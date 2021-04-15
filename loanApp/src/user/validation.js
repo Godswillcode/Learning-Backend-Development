@@ -1,22 +1,23 @@
-import {check} from 'express-validator';
+import { check } from "express-validator";
+
 
 const validateBody = {
     login: [
         check('email')
         .isEmail()
         .trim()
-        .withMessage('email can not be empty'),
+        .withMessage("email cannot be empty"),
         check('role')
         .not()
         .isEmpty()
         .trim()
-        .isIn(['admin', 'staff'])
-        .withMessage("role must be one of staff or admin "),
+        .isIn([ 'admin', 'staff'])
+        .withMessage('role must be one of staff or admin'),
         check('oldPassword')
         .not()
-        .isEmail()
+        .isEmpty()
         .trim()
-        .withMessage('password can not be empty')
+        .withMessage('password cannot be empty')
     ]
 }
 

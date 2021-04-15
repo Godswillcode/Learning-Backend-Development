@@ -1,17 +1,17 @@
-import express from 'express'
-// import contribution_type from './contribution-type/end-points'
-// import loan_repayment from './loan_payment/endpoint'
-// import user_contribution from './user-contribution/endpoint';
-// import loan from './loan/endpoint'
-import user from './user/endpoints'
-import otherRoutes from './helpers/notFound'
+import express from "express";
+import loan_repayment from "./loan_repayment/endpoint";
+import user_contribution from "./user_contribution/endpoint";
+import loan from "./loan/endpoint";
+import user from "./User/endpoints";
+import otherRoutes from "./helpers/notFound";
+
 
 const app = express();
 
-app.use("/api/vl/loan-repayment", loan_repayment);
-app.use("/api/vl/user", user);
-app.use("/api/vl/loan", loan);
-app.use("/api/vl/usercontribution", user_contribution);
+app.use("/api/v1/loan_repayment", loan_repayment);
+app.use("/api/v1/loan",loan);
+app.use("/api/v1/user", user)
+app.use("/api/v1/usercontribution", user_contribution);
 app.use("/", otherRoutes);
 
 export default app

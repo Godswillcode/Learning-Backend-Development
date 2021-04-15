@@ -1,38 +1,38 @@
-import express from 'express'
-import logger from 'morgan'
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import route from './route'
+import express from "express";
+import logger from "morgan";
+import mongoose from  "mongoose";
+import  dotenv from "dotenv";
+import route from "./User/endpoints"
 
-
-dotenv.config()
-
+dotenv.config();
 mongoose.connect(
-    process.env.DATABASE_URL,
-    {
-        useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
-    }
-)
+	process.env.DATABASE_URL,{
+		useNewUrlParser:true,useCreateIndex:true,useUnifiedTopology:true
+	}
+);
+
+const db = mongoose.connection;
+
+db.on("error",(err) => {
+	console.log(err);
+});
+
+db.once("open", () => {
+	console.log("Database connected");
+})
+const app = express();
 
 
-const db = mongoose.connection
+app.use(logger("dev"))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(route);
 
-const app = express()
+const port = parseInt(process.env.PORT || 5007)
+app.set("port", port);
 
-
-db.on('error', console.error.bind(console, 'MongoDB connection error'));
-db.on('once', console.log.bind('Yay!! mongoose connected'))
-
-
-
-app.use(logger('dev'))
-
-app.use(bodyParser.urlencoded({ extended: false }))
-
-app.use(route)
-
-const port = parseInt(process.env.PORT, 10) || 3007
-app.set('port', port)
-app.listen(port, () => console.log(`server running on port ${port}`))
+app.listen(port, () => {
+	console.log(`sever running on port ${port}`);
+});
 
 export default app
