@@ -2,7 +2,7 @@ import express from "express";
 import logger from "morgan";
 import mongoose from  "mongoose";
 import  dotenv from "dotenv";
-import route from "./User/endpoints"
+import route from "./route";
 
 dotenv.config();
 mongoose.connect(
@@ -34,5 +34,7 @@ app.set("port", port);
 app.listen(port, () => {
 	console.log(`sever running on port ${port}`);
 });
+
+app.use(route)
 
 export default app

@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import { validationResult } from "express-validator";
-// import dotenv from "dotenv";
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 
 export const handleResponse = (res, statusCode, message, data, token) => {
