@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 import { generateToken, handleResponse } from "../helpers/util";
 import Users from "../User/user_model";
 
@@ -13,7 +13,7 @@ class UserServices {
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
-      if (isMatch) {
+      if (!isMatch) {
         return handleResponse(res, 401, "Invalid Credentials");
       }
 
@@ -36,7 +36,6 @@ class UserServices {
   }
 
   static async registerUser(req, res) {
-
     try {
       const {
         full_name,
@@ -53,8 +52,6 @@ class UserServices {
         passwordResetExpires,
       } = req.body;
 
-
-
       const user = new Users({
         full_name,
         title,
@@ -70,7 +67,7 @@ class UserServices {
         passwordResetExpires,
       });
 
-      console.log(user)
+      console.log(user);
 
       const salt = await bcrypt.genSalt(10);
 
